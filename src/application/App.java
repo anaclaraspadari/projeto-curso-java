@@ -26,10 +26,7 @@ public class App {
 		try {
 			conn=DB.getConnection();
 			
-			st=conn.prepareStatement("insert into teste "+""
-					+ "(nome)"
-					+"values "
-					+"(?)");
+			st=conn.prepareStatement("");
 			st.setString(1,name);
 			int rowsAffected=st.executeUpdate();
 
