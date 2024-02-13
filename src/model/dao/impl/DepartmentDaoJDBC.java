@@ -12,28 +12,24 @@ import java.util.Map;
 
 import db.DB;
 import db.DbException;
+import model.dao.DepartmentDao;
 import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
-public class SellerDaoJDBC implements SellerDao{
+public class DepartmentDaoJDBC implements DepartmentDao{
     private Connection conn;
-    public SellerDaoJDBC(Connection conn){
+    public DepartmentDaoJDBC(Connection conn){
         this.conn=conn;
     }
-
-    public void insert(Seller obj){
+    public void insert(Department obj){
         PreparedStatement st=null;
 
         try{
-            st=conn.prepareStatement("insert into seller(name, email, birthdate,basesalary,department) values (?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            st=conn.prepareStatement("insert into department(name) values (?)",Statement.RETURN_GENERATED_KEYS);
 
             st.setString(1, obj.getName());
-            st.setString(2, obj.getEmail());
-            st.setDate(3, new java.sql.Date(obj.getBirthDate().getTime()));
-            st.setDouble(4, obj.getBaseSalary());
-            st.setInt(5,obj.getDepartment().getId());
-
+            
             int rowsAffected=st.executeUpdate();
 
             if(rowsAffected>0){
