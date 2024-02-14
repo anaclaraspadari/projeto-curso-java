@@ -21,5 +21,9 @@ public class App {
                 departmentDao.insert(newDepartment);
                 System.out.println("Inserted! New id="+newDepartment.getId());
 
+                System.out.println("====TEST 2: find department by id=====");
+
+                Department dep=departmentDao.findById(1);
+                System.out.println(dep);
         }
 }

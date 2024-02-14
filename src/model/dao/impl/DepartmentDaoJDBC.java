@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.plaf.DesktopPaneUI;
+
 import db.DB;
 import db.DbException;
 import model.dao.DepartmentDao;
@@ -19,6 +21,7 @@ import model.entities.Seller;
 
 public class DepartmentDaoJDBC implements DepartmentDao{
     private Connection conn;
+
     public DepartmentDaoJDBC(Connection conn){
         this.conn=conn;
     }
@@ -47,6 +50,29 @@ public class DepartmentDaoJDBC implements DepartmentDao{
             throw new DbException(e.getMessage());
         }finally{
             DB.closeStatement(st);
+        }
+    }
+    
+    public Department findById(Integer id) {
+        PreparedStatement st=null;
+        ResultSet rs=null;
+        try{
+            st=conn.prepareStatement("select * from department where id=?");
+            st.setInt(1,id);
+            rs=st.executeQuery();
+            if(rs.next()){
+                Department obj=new Department();
+                obj.setId(rs.getInt("id"));
+                obj.setName(rs.getString("name"));
+                return obj;
+            }else{
+                return null;
+            }
+        }catch(Exception e){
+            throw new DbException(e.getMessage());
+        }finally{
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
         }
     }
 }

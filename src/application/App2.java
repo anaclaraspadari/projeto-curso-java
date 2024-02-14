@@ -17,7 +17,7 @@ public class App2 {
         
         SellerDao sellerDao=DaoFactory.createSellerDao();
 
-        System.out.println("\n====TEST 1: insert seller\n===");
+        System.out.println("====TEST 1: insert seller====");
         Seller newSeller=new Seller(null,"Bob","bob@mymail.com",new Date(), 4000.0,department);
         sellerDao.insert(newSeller);
         System.out.println("Inserted! New id="+newSeller.getId());

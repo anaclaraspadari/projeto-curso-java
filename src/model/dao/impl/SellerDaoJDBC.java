@@ -53,4 +53,36 @@ public class SellerDaoJDBC implements SellerDao{
             DB.closeStatement(st);
         }
     }
+
+    public Seller findById(Integer id){
+        PreparedStatement st=null;
+        ResultSet rs=null;
+        try{
+            st=conn.prepareStatement("select seller.*, department.name as depName from seller inner join department on seller.department=department.id where seller.id=?");
+            
+            st.setInt(1,id);
+            rs=st.executeQuery();
+            if(rs.next()){
+                Department dep=new Department();
+                dep.setId(rs.getInt("id"));
+                dep.setName(rs.getString("name"));
+                Seller obj=new Seller();
+                obj.setId(rs.getInt("id"));
+                obj.setName(rs.getString("name"));
+                obj.setEmail(rs.getString("email"));
+                obj.setBirthDate(rs.getDate("birthdate"));
+                obj.setBaseSalary(rs.getDouble("basesalary"));
+                obj.setDepartment(dep);
+                
+                return obj;
+            }else{
+                return null;
+            }
+        }catch(Exception e){
+            throw new DbException(e.getMessage());
+        }finally{
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
+    }
 }
