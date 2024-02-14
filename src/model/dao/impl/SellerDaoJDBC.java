@@ -65,7 +65,7 @@ public class SellerDaoJDBC implements SellerDao{
             if(rs.next()){
                 Department dep=new Department();
                 dep.setId(rs.getInt("id"));
-                dep.setName(rs.getString("name"));
+                dep.setName(rs.getString("depName"));
                 Seller obj=new Seller();
                 obj.setId(rs.getInt("id"));
                 obj.setName(rs.getString("name"));
