@@ -23,7 +23,7 @@ public class App2 {
         // System.out.println("Inserted! New id="+newSeller.getId());
 
         // System.out.println("====TEST 2: find seller by id====");
-        // Seller seller=sellerDao.findById(2);
+        Seller seller=sellerDao.findById(2);
         // System.out.println(seller);
 
         // System.out.println("====TEST 3: find seller by department====");
@@ -38,6 +38,10 @@ public class App2 {
         //     System.out.println(obj);
         // }
 
-        
+        System.out.println("=====TEST 5: updating seller data====");
+        seller.setName("Bob Blue");
+        seller.setEmail("bob_blue@mymail.com");
+        sellerDao.update(seller);
+        System.out.println("Finished update!");
     }
 }
