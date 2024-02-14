@@ -4,20 +4,13 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
-import javax.swing.plaf.DesktopPaneUI;
 
 import db.DB;
 import db.DbException;
 import model.dao.DepartmentDao;
-import model.dao.SellerDao;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class DepartmentDaoJDBC implements DepartmentDao{
     private Connection conn;
@@ -120,5 +113,21 @@ public class DepartmentDaoJDBC implements DepartmentDao{
         }finally{
             DB.closeStatement(st);
         }
+    }
+
+    @Override
+    public void deleteById(Integer id){
+        PreparedStatement st=null;
+        try{
+            st=conn.prepareStatement("delete from department where id=?");
+            st.setInt(1, id);
+
+            st.executeUpdate();
+        }catch(Exception e){
+            throw new DbException(e.getMessage());
+        }finally{
+            DB.closeStatement(st);
+        }
+
     }
 }
