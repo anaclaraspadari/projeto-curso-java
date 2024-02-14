@@ -25,6 +25,8 @@ public class DepartmentDaoJDBC implements DepartmentDao{
     public DepartmentDaoJDBC(Connection conn){
         this.conn=conn;
     }
+
+    @Override
     public void insert(Department obj){
         PreparedStatement st=null;
 
@@ -53,6 +55,7 @@ public class DepartmentDaoJDBC implements DepartmentDao{
         }
     }
     
+    @Override
     public Department findById(Integer id) {
         PreparedStatement st=null;
         ResultSet rs=null;

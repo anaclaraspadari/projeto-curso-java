@@ -16,11 +16,11 @@ public class App2 {
         Department department=new Department(1,null);
         
         SellerDao sellerDao=DaoFactory.createSellerDao();
-
-        // System.out.println("====TEST 1: insert seller====");
-        // Seller newSeller=new Seller(null,"Bob","bob@mymail.com",new Date(), 4000.0,department);
-        // sellerDao.insert(newSeller);
-        // System.out.println("Inserted! New id="+newSeller.getId());
+        
+        System.out.println("====TEST 1: insert seller====");
+        Seller newSeller=new Seller(null,"Bob","bob@mymail.com",new Date(), 4000.0,department);
+        sellerDao.insert(newSeller);
+        System.out.println("Inserted! New id="+newSeller.getId());
 
         System.out.println("====TEST 2: find seller by id====");
         Seller seller=sellerDao.findById(2);

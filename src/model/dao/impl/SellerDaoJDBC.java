@@ -22,6 +22,7 @@ public class SellerDaoJDBC implements SellerDao{
         this.conn=conn;
     }
 
+    @Override
     public void insert(Seller obj){
         PreparedStatement st=null;
 
@@ -54,6 +55,7 @@ public class SellerDaoJDBC implements SellerDao{
         }
     }
 
+    @Override
     public Seller findById(Integer id){
         PreparedStatement st=null;
         ResultSet rs=null;
@@ -63,16 +65,8 @@ public class SellerDaoJDBC implements SellerDao{
             st.setInt(1,id);
             rs=st.executeQuery();
             if(rs.next()){
-                Department dep=new Department();
-                dep.setId(rs.getInt("id"));
-                dep.setName(rs.getString("depName"));
-                Seller obj=new Seller();
-                obj.setId(rs.getInt("id"));
-                obj.setName(rs.getString("name"));
-                obj.setEmail(rs.getString("email"));
-                obj.setBirthDate(rs.getDate("birthdate"));
-                obj.setBaseSalary(rs.getDouble("basesalary"));
-                obj.setDepartment(dep);
+                Department dep=instantiateDepartment(rs);
+                Seller obj=instantiateSeller(rs,dep);
                 
                 return obj;
             }else{
@@ -84,5 +78,23 @@ public class SellerDaoJDBC implements SellerDao{
             DB.closeStatement(st);
             DB.closeResultSet(rs);
         }
+    }
+
+    private Seller instantiateSeller(ResultSet rs, Department dep) throws SQLException{
+        Seller obj=new Seller();
+        obj.setId(rs.getInt("id"));
+        obj.setName(rs.getString("name"));
+        obj.setEmail(rs.getString("email"));
+        obj.setBirthDate(rs.getDate("birthdate"));
+        obj.setBaseSalary(rs.getDouble("basesalary"));
+        obj.setDepartment(dep);
+        return obj;
+    }
+
+    private Department instantiateDepartment(ResultSet rs) throws SQLException {
+        Department dep=new Department();
+        dep.setId(rs.getInt("id"));
+        dep.setName(rs.getString("depName"));
+        return dep;
     }
 }
