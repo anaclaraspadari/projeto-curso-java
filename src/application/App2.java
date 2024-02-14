@@ -25,5 +25,11 @@ public class App2 {
         System.out.println("====TEST 2: find seller by id====");
         Seller seller=sellerDao.findById(2);
         System.out.println(seller);
+
+        System.out.println("====TEST 3: find seller by department====");
+        List<Seller> list=sellerDao.findByDepartment(department);
+        for(Seller obj : list){
+            System.out.println(obj);
+        }
     }
 }
