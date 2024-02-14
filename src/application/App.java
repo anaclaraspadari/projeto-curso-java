@@ -23,7 +23,7 @@ public class App {
 
                 // System.out.println("====TEST 2: find department by id=====");
 
-                // Department dep=departmentDao.findById(1);
+                Department dep=departmentDao.findById(1);
                 // System.out.println(dep);
 
                 // System.out.println("====TEST 3: find all departments=====");
@@ -32,5 +32,11 @@ public class App {
                 // for(Department obj : list){
                 //         System.out.println(obj);
                 // }
+
+                System.out.println("====TEST 4: update department data====");
+                dep=departmentDao.findById(2);
+                dep.setName("Clothes");
+                departmentDao.update(dep);
+                System.out.println("Finished update!");
         }
 }

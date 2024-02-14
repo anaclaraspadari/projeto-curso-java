@@ -33,9 +33,11 @@ public class App2 {
         // }
 
         // System.out.println("====TEST 4: find all sellers====");
-        // List<Seller> list=sellerDao.findAll();
+        // list=sellerDao.findAll();
         // for(Seller obj : list){
         //     System.out.println(obj);
         // }
+
+        
     }
 }
